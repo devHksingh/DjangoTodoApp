@@ -3,5 +3,12 @@
 {% block title %} To-do List{% endblock %}
 
 {% block content %}
-<h1>home page</h1>
+    {% if all_items %}
+    <ul>
+        {% for things in all_items %}
+            <li>{{things.item}} | {{things.completed}}</li>
+        {% endfor %}
+    </ul>    
+    {% endif %}    
+  
 {% endblock %}
