@@ -3,6 +3,19 @@
 {% block title %} To-do List{% endblock %}
 <!-- table-scondary -->
 {% block content %}
+
+{% if messages %}
+    {% for message in messages %}
+        
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            {{message}}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        
+    {%endfor%}
+
+{% endif %}   
+
     {% if all_items %}
     <table class="table table-bordered ">
         {% for things in all_items %}
@@ -10,13 +23,13 @@
                 <tr class="table-success">
                     <td class="striker">{{things.item}}</td> 
                     <td><center>{{things.completed}}</center></td>
-                    <td><center>Delete</center></td>
+                    <td><center><a href="{% url 'delete' things.id %}">Delete</a></center></td>
                 </tr>
             {% else %}
             <tr>
                 <td>{{things.item}}</td> 
                 <td><center>{{things.completed}}</center></td>
-                <td><center>Delete</center></td>
+                <td><center><a href="{% url 'delete' things.id %}">Delete</a></center></td>
             </tr>
             {% endif %}    
         {% endfor %}
